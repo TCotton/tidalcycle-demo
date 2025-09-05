@@ -1,0 +1,7 @@
+## SuperDirt.start;
+#include("SuperDirt");
+
+
+d1 $ sound "bd hh sn hh"
+
+

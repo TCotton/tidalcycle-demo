@@ -1,0 +1,8 @@
+Quarks.checkForUpdates(); 
+Quarks.install("SuperDirt", "v1.7.3")
+#include("SuperDirt");
+
+
+d1 $ sound "bd hh sn hh"
+
+

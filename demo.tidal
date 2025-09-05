@@ -1,0 +1,62 @@
+
+setcps (120/60/4)
+
+d1
+  $ sound "[drum <dr:2>] drum * 2"
+  # gain 0.7
+  # orbit 0 -- routed to audiochannel 1-2
+
+d2
+  $ sound "[drum <dr:1>] drum [drum <dr:5>] drum/2"
+  # gain 0.6
+  # orbit 1 -- routed to audiochannel 3-4
+
+d3
+  $ sound "[<techno:1> <dr:2>] *4"
+  # room 1.5
+  # sz 0.3
+  # gain 0.6
+  # orbit 2 -- routed to audiochannel 5-6
+
+d4
+  $ sound "co"
+  # gain 0.8
+  # orbit 3 -- routed to audiochannel 7-8
+
+d5
+  $ sound "[<techno:3> <techno:2>] *2"
+  # shape "0 0.18"
+  # gain 0.6
+  # orbit 4 -- routed to audiochannel 9-10
+
+d6
+  $ qtrigger $ note "f e'min d'min c [10,14,17] a'min g'min f"
+  # sound "<bass3:0>"
+  # sustain 0.1
+  # room 0.9
+  # sz 0.3
+  # gain 0.6
+  # orbit 5 -- routed to audiochannel 11-12
+
+d7
+  $ note "d'min"
+  # sound "<bass3:0>"
+  # orbit 6 -- routed to audiochannel 13-14
+
+d8
+  $ qtrigger
+  $ slow 2
+  $ jux rev
+  $ chop 16
+  $ sound "piano_c"
+  # gain 0.4
+  # room 0
+  # orbit 7 -- routed to audiochannel 15-16
+
+d9 $ loopAt 4 $ sound "breaks125"
+
+d7
+  $ sound "pi"
+  -- two more variables
+
+hush
