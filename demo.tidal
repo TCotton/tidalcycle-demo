@@ -1,4 +1,3 @@
-
 setcps (120/60/4)
 
 d1
@@ -39,9 +38,17 @@ d6
   # orbit 5 -- routed to audiochannel 11-12
 
 d7
-  $ note "d'min"
-  # sound "<bass3:0>"
+  $ qtrigger
+  $ slow 4
+  $ chew 4 "0 1*2 2*2 [~ 2]"
+  $ sound "<vocals_c:2>"
+  # gain 0.6
+  # room 2.0
   # orbit 6 -- routed to audiochannel 13-14
+
+d7 silence
+
+hush
 
 d8
   $ qtrigger
@@ -49,14 +56,29 @@ d8
   $ jux rev
   $ chop 16
   $ sound "piano_c"
-  # gain 0.4
-  # room 0
+  # gain 0.45
+  # room 1.0
   # orbit 7 -- routed to audiochannel 15-16
 
-d9 $ loopAt 4 $ sound "breaks125"
+  -- bus signal send/control, 0.5 is full vol
+d1 $ ampbus 1 0.5
 
-d7
-  $ sound "pi"
-  -- two more variables
+hush
+
+  -- turn it off
+d1 $ ampbus 1 0.0
+
+d1 $ stack [
+  sound "[drum <dr:2>] drum * 2"
+] # orbit 0
+
+d1 $ trigger 1
+  $ s "<bass3:0>"
+  # note "d4"
+  # sustain "8"
+  # attack "0.5"
+  # hold "4"
+  # release "3.5"
+  # amprecv 1
 
 hush
