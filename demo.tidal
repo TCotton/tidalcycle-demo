@@ -1,5 +1,8 @@
 setcps (120/60/4)
 
+--- end code comments
+---
+
 d1
   $ every 4 (|> sound "drum")
   $ sound "[drum <dr:2>] drum *2"
@@ -77,10 +80,15 @@ hush
 d8
   $ qtrigger
   $ slow 2
+  -- $ spread ($) [jux rev, rev]
+  -- $ spread ($) [density 2, rev, slow 2, striate 3, (# speed "0.8")]
   $ jux rev
+  -- $ rev
+  -- $ palindrome
   $ chop 32
   $ sound "piano_c"
-  # gain 0.30
+  -- # fadeOut 8
+  # gain 0.35
   # room 1.0
   # orbit 7 -- routed to audiochannel 15-16
 
@@ -96,6 +104,9 @@ unsolo 8
 d8 silence
 
 hush
+
+d22
+
 
 --- haskel function signatures
 --- # the same as the pipe operator |=| pipe equals pipe
