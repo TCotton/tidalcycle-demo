@@ -18,6 +18,8 @@ d2
 
 d2 silence
 
+d6 silence
+
 d3
   $ sound "<techno:1> *4"
   # room 1.5
@@ -82,13 +84,13 @@ d8
   $ slow 2
   -- $ spread ($) [jux rev, rev]
   -- $ spread ($) [density 2, rev, slow 2, striate 3, (# speed "0.8")]
-  $ jux rev
+  -- $ jux rev
   -- $ rev
-  -- $ palindrome
+  $ palindrome
   $ chop 32
   $ sound "piano_c"
   -- # fadeOut 8
-  # gain 0.35
+  # gain 0.4
   # room 1.0
   # orbit 7 -- routed to audiochannel 15-16
 
