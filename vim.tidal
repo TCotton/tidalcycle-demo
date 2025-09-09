@@ -83,10 +83,10 @@ d8
   $ qtrigger
   $ slow 2
   -- $ spread ($) [jux rev, rev]
-  -- $ spread ($) [density 2, rev, slow 2, striate 3, (# speed "0.8")]
+  $ spread ($) [density 2, rev, slow 2, striate 3, (# speed "0.8")]
   -- $ jux rev
   -- $ rev
-  $ palindrome
+  -- $ palindrome
   $ chop 32
   $ sound "piano_c"
   -- # fadeOut 8
