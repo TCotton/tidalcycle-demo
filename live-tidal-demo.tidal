@@ -1,97 +1,31 @@
 setcps (120/60/4)
 
---- end code comments
---- 808lt:0
---- hardcore:8
-
-d1
-  $ every 4 (|> sound "<drum:2> <hardcore:8> * 4")
-  $ sound "[drum <dr:2>] drum *2"
-  # room 0.3
-  # gain 0.6
-  # orbit 0 -- routed to audiochannel 1
-
-
-d2
-  $ sound "<dr:2>"
-
-hush
-
 -- Drum patterns
-let drumz1 = every 4 (|> sound "<drum:2> <hardcore:8> * 4")
+let drumz1 = every 4 (|> sound "drum")
                 $ sound "[drum <dr:2>] drum*2"
                 # gain 0.6
-                # orbit 0
+		            # orbit 0 -- routed to audiochannel 1-2
     drumz2 = sound "[drum <dr:1>] drum [drum <dr:5>] drum /2"
                 # gain 0.6
-                # orbit 1
+                # orbit 1 -- routed to audiochannel 3-4
     drumz3 = sound "<techno:1> *4"
                 # room 1.5
-                # size 0.3
-                # gain 0.7
-                # orbit 2
+		            # size 0.3
+		            # gain 0.7
+                # orbit 2 -- routed to audiochannel 5-6
     drumz4 = sound "co"
-                # gain 0.6
-                # orbit 3
+		            # gain 0.6
+		            # orbit 3 -- routed to audiochannel 7-8
     drumz5 = sound "[<techno:3> <techno:2>] *2"
-                # shape "0 0.18"
-                # gain 0.6
-                # orbit 4
+		            # shape "0 0.18"
+		            # gain 0.6
+		            # orbit 4 -- routed to audiochannel 9-10
 in
 d1 $ stack [drumz1, drumz2, drumz3, drumz4, drumz5]
 
-hush
-
-xfade 1 8 $ 8
-
-hush
-
+d1 silence
+-- Reproduction of piano intro
 d2
-  $ sound "[drum <dr:1>] drum [drum <dr:5>] drum /2"
-  # gain 0.6
-  # orbit 1 -- routed to audiochannel 3-4
-
-d2 silence
-
-d6 silence
-
-d3
-  $ fadeIn 8
-  $ sound "<techno:1> *4"
-  # room 1.5
-  # size 0.3
-  # gain 0.7
-  # orbit 2 -- routed to audiochannel 5-6
-
-jumpMod 1 3 $ s drum
-
-d1 $ sound "bd sn"   -- start with a simple beat
-
-xfade 1 $ sound "hh*8 cp*2"//
-
-
-d3 silence
-
-d1 $ fadeInFrom 4 8 $ sound "bd sn cp hh"
-
-hush
-
-d10
-  $ sound "co"
-  # gain 0.6
-  # orbit 3 -- routed to audiochannel 7-8
-
-d10 silence
-
-d5
-  $ sound "[<techno:3> <techno:2>] *2"
-  # shape "0 0.18"
-  # gain 0.6
-  # orbit 4 -- routed to audiochannel 9-10
-
-d5 silence
-
-d6
   $ qtrigger $ note "f e'min d'min c [10,14,17] a'min g'min f"
   # sound "<bass3:0>"
   # sustain 0.1
@@ -101,8 +35,8 @@ d6
   # orbit 5 -- routed to audiochannel 11-12
 
 hush
-
-d7
+-- vocal sample
+d3
   $ qtrigger
   $ slow 4
   $ chew 4 "0 1*2 2*2 [~ 2]"
@@ -114,13 +48,6 @@ d7
   # ring 0.5
   # orbit 6 -- routed to audiochannel 13
 
-let drum1 = fadeIn 4 $ sound "bd*2"
-    drum2 = fadeIn 8 $ sound "sn*2"
-    drum3 = fadeIn 12 $ sound "hh*4"
-in
-d1 $ qtrigger $ seqP [ (0, 16, stack [drum1, drum2, drum3])
-    , (16, 32, fadeOut 8 $ stack [drum1, drum2, drum3])]
-
 solo 7
 
 hush
@@ -129,77 +56,24 @@ unsolo 7
 
 d7 silence
 
-hush
-
-xfade 1 8
-  $ slow 2
-  -- $ spread ($) [jux rev, rev]
-  $ spread ($) [density 2, rev, slow 2, striate 3, (# speed "0.8")]
-  -- $ jux rev
-  -- $ rev
-  -- $ palindrome
-  $ chop 32
-  $ sound "piano_c"
-  -- # fadeOut 8
-  # gain 0.35
-  # room 1.0
-  # orbit 7 -- routed to audiochannel 15-16
-
-
-let piano = slow 2
-          -- $ spread ($) [jux rev, rev]
-          -- $ spread ($) [density 2, rev, slow 2, striate 3, (# speed "0.8")]
-          $ jux rev
-          -- $ rev
-          -- $ palindrome
-          $ chop 32
-          $ sound "piano_c"
-          # gain 0.35
-          # room 1.0
-          # orbit 7 -- routed to audiochannel 15-16
-in
-d2 $ qtrigger $ seqP
-    [ (0, 2, silence)        -- 4 cycles of silence
-    , (4, 12, xfadeIn 2 piano) -- fade in over 8 cycles (cycles 4–12)
-    , (12, 100, piano)       -- play piano fully afterwards
+let spread1    = spread ($) [jux rev, rev]
+    spread2    = spread ($) [density 2, rev, slow 2, striate 3, (# speed "0.8")]
+    juxrev     = jux rev
+    revEffect  = rev
+    palindrom  = palindrome
+    in d4 $ stack [
+    qtrigger
+    $ slow 2
+    -- $ juxrev
+    $ chop 32
+    $ sound "piano_c"
+    # gain 0.4
+    # room 1.0
+    # orbit 7
     ]
 
-
-    d2
-      $ qtrigger
-      $ fadeInFrom 2 8
-      $ slow 2
-      -- $ spread ($) [jux rev, rev]
-      $ spread ($) [density 2, rev, slow 2, striate 3, (# speed "0.8")]
-      -- $ jux rev
-      -- $ rev
-      $ palindrome
-      $ chop 32
-      $ sound "piano_c"
-      -- # fadeOut 8
-      # gain 0.4
-      # room 1.0
-      # orbit 7 -- routed to audiochannel 15-16
-
-
-    --- d2 $ fadeInFrom 16 8 piano
-
-
--- jux
-
 hush
 
-unsolo 8
-
---  # cut 2
---  # fadeTime "2"
-
-d8 silence
-
-hush
-
-d22
-
-
+d4 silence
 --- haskel function signatures
 --- # the same as the pipe operator |=| pipe equals pipe

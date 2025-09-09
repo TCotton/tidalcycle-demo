@@ -1,19 +1,19 @@
 setcps (120/60/4)
 
---- end code comments
+---   
 ---
 
 d1
   $ every 4 (|> sound "drum")
   $ sound "[drum <dr:2>] drum *2"
-  # gain 0.6
+  # gain 0.6 
   # orbit 0 -- routed to audiochannel 1-2
 
 d1 silence
 
 d2
   $ sound "[drum <dr:1>] drum [drum <dr:5>] drum /2"
-  # gain 0.6
+  # gain 0.6 
   # orbit 1 -- routed to audiochannel 3-4
 
 d2 silence
@@ -24,7 +24,7 @@ d3
   $ sound "<techno:1> *4"
   # room 1.5
   # size 0.3
-  # gain 0.7
+  # gain 0.7 
   # orbit 2 -- routed to audiochannel 5-6
 
 d3 silence
@@ -33,7 +33,7 @@ hush
 
 d10
   $ sound "co"
-  # gain 0.6
+  # gain 0.6 
   # orbit 3 -- routed to audiochannel 7-8
 
 d10 silence
@@ -41,7 +41,7 @@ d10 silence
 d5
   $ sound "[<techno:3> <techno:2>] *2"
   # shape "0 0.18"
-  # gain 0.6
+  # gain 0.6 
   # orbit 4 -- routed to audiochannel 9-10
 
 d5 silence
@@ -84,7 +84,7 @@ d8
   $ slow 2
   -- $ spread ($) [jux rev, rev]
   -- $ spread ($) [density 2, rev, slow 2, striate 3, (# speed "0.8")]
-  -- $ jux rev
+  --  $jux rev
   -- $ rev
   $ palindrome
   $ chop 32
@@ -94,7 +94,7 @@ d8
   # room 1.0
   # orbit 7 -- routed to audiochannel 15-16
 
--- jux
+
 
 hush
 
