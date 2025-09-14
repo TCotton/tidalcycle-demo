@@ -1,32 +1,20 @@
 setcps (120/60/4)
+
 ---
--- define a shared amplitude modulation on bus 2
-cF 2 $ slow 4 $ range 0.2 1 sine
-
-d1 $ sound "sax" # legato 1 # squizbus 1 "1 2 5 1.5" # lpfbus 2 "400 2000 5000" # lpq 0.4 # pan 0
-
-d2 $ sound "sax" # legato 1 # hpfrecv "<2 1>" # pan 1
-
-hush
+---
 
 d1
   $ every 4 (|> sound "drum")
   $ sound "[drum <dr:2>] drum *2"
   # gain 0.6
-  # ampbus 2
   # orbit 0 -- routed to audiochannel 1-2
 
 d1 silence
 
 d2
-  $ trigger 1
-  $ sound "[drum <dr:1>] drum [drum <dr:5>] drum /2"
-  # gain 0.6
-  # amprecv 2
+  $ sound "[drum <dr:1>] drum [drum <techno:5>] drum /2"
+  # gain 0.5
   # orbit 1 -- routed to audiochannel 3-4
-
-once $ n "c" # s "superpiano" # sustain 10000 # crushrecv 1
-d2 $ ampbus 1 ("4 3")
 
 d2 silence
 
@@ -98,15 +86,13 @@ d8
   -- $ spread ($) [density 2, rev, slow 2, striate 3, (# speed "0.8")]
   --  $jux rev
   -- $ rev
-  $ palindrome
+  $ jux rev
   $ chop 32
   $ sound "piano_c"
   -- # fadeOut 8
   # gain 0.35
   # room 1.0
   # orbit 7 -- routed to audiochannel 15-16
-
-
 
 hush
 
