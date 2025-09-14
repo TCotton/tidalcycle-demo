@@ -22,8 +22,8 @@ do
             # shape "0 0.18"
             # gain 0.6
             # orbit 4
-  d1 $ stack [drumz1, drumz2, drumz3, drumz4, drumz5] # crush 4 # delaytime (range 0.5 1.2) $ fast 4 sine # delayfeedback 0.6 # delaycutoff 1000 # delaymix 0.7 # delaypan (range (-1) 1 $ slow 2 sine)
-   --  # krush 6 # shape 0.3 # room 1 # gain 0.7 # delaytime (range 1.2 0.5 $ fast 4 sine)
+  d1 $ stack [drumz2] 
+	--  # krush 6 # shape 0.3 # room 1 # gain 0.7 # delaytime (range 1.2 0.5 $ fast 4 sine)
 
 hush
 
@@ -45,7 +45,7 @@ hush
 d1 silence
 -- vocal sample
 
-d3 
+ xfadeIn 1 4  
   $ slow 4
   $ loopFirst
   $ chew 4 "0 1*2 2*2 [~ 2]"
@@ -76,7 +76,7 @@ let spread1    = (spread ($) [jux rev, rev])
     palindrom  = palindrome
     in d4 $ stack [(
       slow 2
-      $ spread2
+      $ juxrev 
       $ chop 32
       $ sound "piano_c"
       # gain 0.35
