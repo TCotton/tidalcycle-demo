@@ -1,0 +1,25 @@
+
+d6
+  $ note "[f [10,14,17]]"
+  # sound "<sf:1>"
+  # nudge 1.5
+  # room 1.0
+  # gain 0.7
+  # lpf (range 100 500 $ slow 8 sine)
+  # lpq 0.5
+  -- # lpf (range 2000 3000 sine)
+  -- # hpf (range 200 300 sine)
+
+hush
+
+  -- # room 1.0
+  -- # lpf 800
+  -- # room 2.0
+  -- # lpf (range 2000 3000 sine)
+  -- # hpf (range 200 300 sine)
+
+hush
+
+-- reverbkick
+-- seawolf:2
+-- voodoo:0

@@ -5,29 +5,28 @@ cps (120/60/4)
 do
   let drumz1 = every 4 (|> sound "drum")
             $ sound "[drum <dr:2>] drum *2"
-            # gain 0.6
+            # gain 0.7
             # orbit 0
   let drumz2 = sound "[drum <dr:1>] drum [drum <techno:5>] drum /2"
-            # gain 0.5
             # orbit 1
   let drumz3 = sound "<techno:1> *4"
-            # room 1.5
-            # size 0.3
-            # gain 0.7
             # orbit 2
   let drumz4 = sound "co"
-            # gain 0.6
             # orbit 3
   let drumz5 = sound "[<techno:3> <techno:2>] *2"
-            # shape "0 0.18"
-            # gain 0.6
             # orbit 4
-  d1 $ stack [drumz2] 
-	--  # krush 6 # shape 0.3 # room 1 # gain 0.7 # delaytime (range 1.2 0.5 $ fast 4 sine)
+  d1 $ stack [drumz1]
+	  --  # krush 6 # shape 0.3 # room 1 # gain 0.5 # delaytime (range 1.2 0.5 $ fast 4 sine)
 
 hush
 
-d1 silence
+d1 silence -- beats
+
+d2 silence -- piano intro
+
+d3 silence -- uses fadeIn can't be silenced unless change first line of code
+
+d4 silence -- piano sample
 
 -- Reproduction of piano intro
 
@@ -42,10 +41,13 @@ d2
 
 hush
 
-d1 silence
+d1 silence -- beats
+
+d2 silence -- piano intro
+
 -- vocal sample
 
- xfadeIn 1 4  
+xfadeIn 1 4
   $ slow 4
   $ loopFirst
   $ chew 4 "0 1*2 2*2 [~ 2]"
@@ -63,7 +65,7 @@ hush
 
 unsolo 3
 
-d1 silence
+d4 silence
 
 hush
 
@@ -74,9 +76,9 @@ let spread1    = (spread ($) [jux rev, rev])
     juxrev     = jux rev
     revEffect  = rev
     palindrom  = palindrome
-    in d4 $ stack [(
+    in d4 $ stack [( -- in xfadeIn 1 1 $ stack [(
       slow 2
-      $ juxrev 
+      $ juxrev
       $ chop 32
       $ sound "piano_c"
       # gain 0.35
@@ -86,6 +88,18 @@ let spread1    = (spread ($) [jux rev, rev])
 
 hush
 
-d4 silence
+d4 silence -- piano sample
+
+xfadeIn 4 2
+  $ note "f e'min d'min c [10,14,17] a'min g'min f"
+  # sound "<sf:1>"
+  # nudge 1.5
+  # room 1.0
+  # gain 0.7
+  # lpf (range 100 700 $ slow 8 sine)
+  # lpq 0.5
+  # sustain 4
+  # orbit 6
+
 --- haskel function signatures
 --- # the same as the pipe operator |=| pipe equals pipe

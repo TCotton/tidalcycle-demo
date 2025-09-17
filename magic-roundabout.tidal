@@ -1,0 +1,25 @@
+-- d5 $ n "c c c g  a a a f  a a a f  bb bb bb g" # sound "superpiano"
+
+-- d5 $ n "c ~ c g  a ~ a f  a ~ a f  bb ~ bb g" # sound "superpiano"
+  -- # gain 0.5
+  -- # room 1.0
+ --  # orbit 8
+
+-- d5 $ n "<[f4 a4 c5] [d4 f4 a4] [g4 bb4 d5] [c4 e4 g4 bb4]>"
+  -- # gain 0.6
+  --  # sound "superpiano"
+  --  # sustain 4
+
+-- d5 $ n "f2 a2 d2 g2"
+  -- # sound "<bass3:0>"
+  -- # gain 0.6
+  --  # sustain 2
+  --  # room 1.0
+  --  # orbit 8
+  --  # legato 2
+
+-- d5  $ swingBy 0.25 8 $
+  --n "c g a f a f bb g"
+  -- # sound "superpiano"
+  -- # legato 1.2
+  -- # gain 1.1
