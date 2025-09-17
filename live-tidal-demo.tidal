@@ -6,15 +6,15 @@ do
   let drumz1 = every 4 (|> sound "drum")
             $ sound "[drum <dr:2>] drum *2"
             # gain 0.7
-            # orbit 0
+            # orbit 0 -- routed to audiochannel 1-2
   let drumz2 = sound "[drum <dr:1>] drum [drum <techno:5>] drum /2"
-            # orbit 1
+            # orbit 1 -- routed to audiochannel 3-4
   let drumz3 = sound "<techno:1> *4"
-            # orbit 2
+            # orbit 2 -- routed to audiochannel 5-6
   let drumz4 = sound "co"
-            # orbit 3
+            # orbit 3 -- routed to audiochannel 7-8
   let drumz5 = sound "[<techno:3> <techno:2>] *2"
-            # orbit 4
+            # orbit 4 -- routed to audiochannel 9-10
   d1 $ stack [drumz1]
 	  --  # krush 6 # shape 0.3 # room 1 # gain 0.5 # delaytime (range 1.2 0.5 $ fast 4 sine)
 
@@ -45,6 +45,8 @@ d1 silence -- beats
 
 d2 silence -- piano intro
 
+d4 silence -- piano four
+
 -- vocal sample
 
 xfadeIn 1 4
@@ -57,7 +59,7 @@ xfadeIn 1 4
   # room 2.0
   # crush 4
   # ring 0.5
-  # orbit 6 -- routed to audiochannel 13
+  # orbit 6 -- routed to audiochannel 13-14
 
 solo 3
 
@@ -78,12 +80,12 @@ let spread1    = (spread ($) [jux rev, rev])
     palindrom  = palindrome
     in d4 $ stack [( -- in xfadeIn 1 1 $ stack [(
       slow 2
-      $ juxrev
+      $ palindrom
       $ chop 32
       $ sound "piano_c"
       # gain 0.35
       # room 1.0
-      # orbit 7
+      # orbit 7 -- routed to audiochannel 15-16
       )]
 
 hush
@@ -99,7 +101,9 @@ xfadeIn 4 2
   # lpf (range 100 700 $ slow 8 sine)
   # lpq 0.5
   # sustain 4
-  # orbit 6
+  # orbit 6 -- routed to audiochannel 13-14
+
+
 
 --- haskel function signatures
 --- # the same as the pipe operator |=| pipe equals pipe
