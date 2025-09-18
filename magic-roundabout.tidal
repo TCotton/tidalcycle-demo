@@ -5,18 +5,48 @@
   -- # room 1.0
  --  # orbit 8
 
--- d5 $ n "<[f4 a4 c5] [d4 f4 a4] [g4 bb4 d5] [c4 e4 g4 bb4]>"
-  -- # gain 0.6
-  --  # sound "superpiano"
-  --  # sustain 4
+d5 $ n "<[f4 a4 c5] [d4 f4 a4] [g4 bb4 d5] [c4 e4 g4 bb4]>"
+  # gain 0.6
+  # sound "superpiano"
+  # sustain 4
+  # cut 1
 
--- d5 $ n "f2 a2 d2 g2"
-  -- # sound "<bass3:0>"
-  -- # gain 0.6
-  --  # sustain 2
-  --  # room 1.0
-  --  # orbit 8
-  --  # legato 2
+hush
+
+let spread1    = (spread ($) [jux rev, rev])
+    spread2    = spread ($) [density 2, rev, slow 2, striate 3, (# speed "0.8")]
+    juxrev     = jux rev
+    revEffect  = rev
+    palindrom  = palindrome
+    cymbols    = fast 2 $ sound "ho:4 hc ho:4 hc"
+    # room 1.0 # gain 0.2 # cut 1
+    in d4 $ stack [( -- in xfadeIn 1 1 $ stack [(
+      slow 2
+      $ juxrev
+      $ chop 32
+      $ sound "piano_c"
+      # gain 0.4
+      # room 1.0
+      ), cymbols] # orbit 7 -- routed to audiochannel 15-16
+
+d6 $ fadeIn 4 $ fast 2 $ sound "ho:4 hc ho:4 hc" # room 1.0 # gain 0.4 # cut 1
+
+hush
+
+d6 $ n "f2 a2 d2 g2"
+  # sound "<bass3:0>"
+  # gain 0.6
+  # sustain 2
+  # room 1.0
+  # orbit 8
+  # legato 2
+
+  let drumz3 = sound "[drum <dr:1>] drum [drum <techno:5>] drum /2"
+ 11             # orbit 1 -- routed to audiochannel 3-4
+
+d7 $ fast 2 $ sound "ho:4 hc ho:4 hc" # gain 0.7 # room 1.0 # cut 1
+
+hush
 
 -- d5  $ swingBy 0.25 8 $
   --n "c g a f a f bb g"
