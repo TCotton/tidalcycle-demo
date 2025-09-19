@@ -7,7 +7,7 @@ do
             $ sound "[drum <dr:2>] drum *2"
             # gain 0.7
             # orbit 0 -- routed to audiochannel 1-2
-  let drumz3 = sound "[drum <dr:1>] drum [drum <techno:5>] drum /2"
+  let drumz2 = sound "[drum <dr:1>] drum [drum <techno:5>] drum /2"
             # orbit 1 -- routed to audiochannel 3-4
   let drumz3 = sound "<techno:1> *4"
             # orbit 2 -- routed to audiochannel 5-6
@@ -15,8 +15,9 @@ do
             # orbit 3 -- routed to audiochannel 7-8
   let drumz5 = sound "[<techno:3> <techno:2>] *2"
             # orbit 4 -- routed to audiochannel 9-10
-  d1 $ stack [drumz1]
-	   -- # krush 6 # shape 0.3 # room 1 # gain 0.5 # delaytime (range 1.2 0.5 $ fast 4 sine)
+  let cym    = fast 2 $ sound "ho:4 hc ho:4 hc" # gain 0.45 # cut 1  # orbit 0 
+  d1 $ stack [ drumz1 ] 
+	    # krush 6 # shape 0.3 # room 1 # gain 0.5 # delaytime (range 1.2 0.5 $ fast 4 sine)
 
 hush
 
@@ -55,7 +56,7 @@ xfadeIn 1 4
   $ chew 4 "0 1*2 2*2 [~ 2]"
   $ ghost' (1/4)
   $ sound "<vocals_c:2>"
-  # gain 0.6
+  # gain 0.65
   # room 2.0
   # crush 4
   # ring 0.5
@@ -78,30 +79,28 @@ let spread1    = (spread ($) [jux rev, rev])
     juxrev     = jux rev
     revEffect  = rev
     palindrom  = palindrome
-    cymbols    = fast 2 $ sound "ho:4 hc ho:4 hc" # room 1.0 # gain 0.3 # cut 1
     in d4 $ stack [( -- in xfadeIn 1 1 $ stack [(
       slow 2
-      $ palindrom
       $ chop 32
       $ sound "piano_c"
-      # gain 0.4
+      # gain 0.64
       # room 1.0
       # orbit 7 -- routed to audiochannel 15-16
-      ), cymbols]
+      )]
 
 hush
 
 d4 silence -- piano sample
 
-xfadeIn 4 2
+xfadeIn 4 2 -- d5 
   $ note "f e'min d'min c [10,14,17] a'min g'min f"
   # sound "<sf:1>"
-  # nudge 1.5
+ -- # nudge 1.5
   # room 1.0
-  # gain 0.7
-  # lpf (range 100 700 $ slow 8 sine)
-  # lpq 0.5
-  # sustain 4
+  # gain 0.6
+ -- # lpf (range 100 700 $ slow 8 sine)
+ --  # lpq 0.5
+ --  # sustain 4
   # orbit 6 -- routed to audiochannel 13-14
 
 

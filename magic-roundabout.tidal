@@ -18,20 +18,21 @@ let spread1    = (spread ($) [jux rev, rev])
     juxrev     = jux rev
     revEffect  = rev
     palindrom  = palindrome
-    cymbols    = fast 2 $ sound "ho:4 hc ho:4 hc"
-    # room 1.0 # gain 0.2 # cut 1
+    cymbols    = fast 2 $ sound "ho:4 hc ho:4 hc" # room 1.0 # gain 0.2 # cut 1
     in d4 $ stack [( -- in xfadeIn 1 1 $ stack [(
       slow 2
       $ juxrev
       $ chop 32
       $ sound "piano_c"
-      # gain 0.4
+      # gain 1.0
       # room 1.0
-      ), cymbols] # orbit 7 -- routed to audiochannel 15-16
+      )] # orbit 7 -- routed to audiochannel 15-16
 
 d6 $ fadeIn 4 $ fast 2 $ sound "ho:4 hc ho:4 hc" # room 1.0 # gain 0.4 # cut 1
 
 hush
+
+d7 $ off 0.5 (|+| n "7") $ n "0 3 5" # sound "superpiano" # orbit 0
 
 d6 $ n "f2 a2 d2 g2"
   # sound "<bass3:0>"
@@ -47,6 +48,16 @@ d6 $ n "f2 a2 d2 g2"
 d7 $ fast 2 $ sound "ho:4 hc ho:4 hc" # gain 0.7 # room 1.0 # cut 1
 
 hush
+
+d7 $ n "[c4 f4 g4 bb4]"
+  # sound "superpiano"
+  # sustain 2
+  # gain 0.6
+  # orbit 0
+  # legato 1.5
+  # room 1.0
+
+
 
 -- d5  $ swingBy 0.25 8 $
   --n "c g a f a f bb g"
