@@ -1,3 +1,5 @@
+cps (120/60/4)
+
 do
   let techno4 = chop 16 
             $ sound "[<techno:4>] / 2"
