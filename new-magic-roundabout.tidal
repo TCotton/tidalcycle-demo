@@ -1,10 +1,8 @@
 do
-  let techno4 = n (fast 2 $ fmap (*7)
-            $ run "0 1 2 3")
-            # s "techno:4"
-            # decay "[1 0.2]/8"
-            # voice "[0.5 0]/2"
-            # gain 1.0
+  let techno4 = chop 16 
+            $ sound "[<techno:4>] / 2"
+            # room 0.5 
+            # gain 0.7
             # orbit 0
   let drum1 = sound "<drum:0> * 4"
             # room 0.5 
@@ -28,29 +26,18 @@ do
 	    # gain 1.0
 	    # legato 4
 	    # orbit 4 
-  d1 $ stack [  drum2 , d808 , drum1 , techno4 ]
+  d1 $ stack [  bass , drum1 ]
+
+hush
 
 do 
-  let organ1 = sound "<m_organ:1>"
-	    # room 0.4
-	    # size 0.4
-	    # gain 0.6
-	    # legato 4
-	    # sustain 8
-	    # orbit 5
-  let organ2 = slow 2
-	    $ striateBy 32
-	    $ jux rev
-	    $ sound "<m_organ:2>"
-	    # orbit 6
   let arpyz = sound "arpy:cf arpy:f4 arpy:g4 arpy:bb4"
 	    # room 0.9
 	    # size 0.3
-	    # splice 4 (slow "1 2" "1 2 3 4")
 	    # gain (range 0.3 0.5 $ slow 4 sine)
 	    # delayfeedback 0.4
 	    # delaytime 0.48
-	    # orbit 7
+	    # orbit 5
   let organ3 = qtrigger 
 	    $ splice 8 (slow "1 2" "1 2 3 4")
 	    $ sound "m_organ:3 m_organ:3"
@@ -61,7 +48,7 @@ do
 	    # lpf 1200 # lpq 0.3
 	    # hpf 400  # hpq 0.3
 	    # distort 0.5
-	    # orbit 8
+	    # orbit 6
   let organ4 = repeatCycles 4
 	    $ chop 8 
 	    $ sound "<m_organ:4>"
@@ -69,24 +56,23 @@ do
 	    # room 0.9
 	    # orbit 7
   let techno5 = jux rev 
-	     $ chop 16 
-	     $ sound "techno:5"
-	     # lpf 2000 # lpq 0.3
-	     # hpf 800  # hpq 0.3
-	     # distort 1 
-	     # gain 0.4
-	     # orbit 5
-  d3 $ stack [ organ1 , organ2 , arpyz , organ3 , organ4 , techno5 ]
+	    $ chop 16 
+	    $ sound "techno:5"
+	    # lpf 2000 # lpq 0.3
+	    # hpf 800  # hpq 0.3
+	    # distort 1 
+	    # gain 0.4
+	    # orbit 5 
+  d3 $ stack [ arpyz , techno5 , organ3 ]
+
 
 hush
 
 once $ sound "<m_bowie:2>" # orbit 5
 
-d7 silence 
+d3 silence 
  
-d8 silence
-
-jumpMod 1 4
+jumpIn' 1 4
   $ qtrigger
   $ loopAt 2 
   $ splice 4 (slow "1 2" "1 2 3 4") 
@@ -95,78 +81,22 @@ jumpMod 1 4
   # size 0.4
   # gain 1.0
   # legato 4
-  # orbit 6
+  # orbit 0
 
 d3 silence
 
-jumpMod 1 4
+jumpIn' 1 4
   $ qtrigger
   $ loopAt 4
-  $ chop 4 
   $ sound "<m_organ:1>"
-  # room 0.4
+  # room 2.0
   # size 0.4
-  # gain 0.6
+  # gain 0.43
   # legato 4
   # sustain 8
-  # orbit 6
+  # orbit 0
+  # silence 
 
 hush
 
-d6
-  $ slow 2
-  $ striateBy 32
-  $ jux rev
-  $ sound "<m_organ:2>"
-
-d7 $ sound "arpy:cf arpy:f4 arpy:g4 arpy:bb4"
-  # room 0.9
-  # size 0.3
-  # splice 4 (slow "1 2" "1 2 3 4")
-  # gain (range 0.3 0.5 $ slow 4 sine)
-  # delayfeedback 0.4
-  # delaytime 0.48
-  # orbit 7
-
-d8
-  $ qtrigger 
-  $ splice 8 (slow "1 2" "1 2 3 4")
-  $ sound "m_organ:3 m_organ:3"
-  # gain 0.4
-  # room 0.9
-  # triode 10
-  # crush 10 
-  # lpf 1200 # lpq 0.3
-  # hpf 400  # hpq 0.3
-  # distort 0.5
-  # orbit 8
-
-d8 silence
-
-hush
-
-d9 $ repeatCycles 4
-  $ chop 8 
-  $ sound "<m_organ:4>"
-  # gain 0.6
-  # room 0.9
-  # orbit 7
-
-d10
-  $ jux rev 
-  $ chop 16 
-  $ sound "techno:5"
-  # lpf 2000 # lpq 0.3
-  # hpf 800  # hpq 0.3
-  # distort 1 
-  # gain 0.4
-  # orbit 5
-
-hush
-
-d1 $ n (fast 2 $ fmap (*7) $ run "0 1 2 3")
-  # s "techno:4"
-  # decay "[1 0.2]/8"
-  # voice "[0.5 0]/2"
-  # gain 1.0
 
