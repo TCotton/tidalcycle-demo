@@ -1,0 +1,92 @@
+
+d1 $ sound "bd sn" # gain 0.8
+
+d2 $ stack [
+  sound "<reverbkick:0> * 4" # room 0.5 # gain 0.8,
+  sound "[<808:0><808:1>] * 2" # room 0.5 # gain 0.7,
+  sound "<dr:0> * 4" # room 1.0 # size 0.3 # gain 0.8
+]  # orbit 0 
+
+hush 
+
+jumpIn' 2 1
+  $ qtrigger
+  $ loopAt 4
+  $ sound "<m_bass:1>"
+  # room 0.4
+  # size 0.4
+  # gain 1.0
+  # legato 4
+  # sustain 8  
+  # orbit 1
+
+jumpIn' 2 1
+  $ qtrigger
+  $ loopAt 4
+  $ sound "<m_organ:5>"
+  # room 0.4
+  # size 0.4
+  # gain 0.6
+  # legato 4
+  # sustain 8
+  # orbit 2
+
+hush
+
+d3 $ sound "arpy:0 arpy:4 arpy:2 arpy:1"
+  # gain 0.8
+  # room 0.5
+
+d4 $ loopAt 4
+   $ sound "<m_bass:0>"
+   # gain 1.0
+   # room 1.0 
+
+d5 $ loopAt 4
+   $ sound "<m_organ:5>"
+   # gain 1.0	
+   # room 1.0
+
+d6
+  $ slow 2
+  $ striateBy 32
+  $ jux rev
+  $ sound "<m_organ:2>"
+  # accelerate 1
+
+d7 $ sound "arpy:cf arpy:f4 arpy:g4 arpy:bb4"
+  # room 0.9
+  # size 0.3
+  # gain (range 0.4 0.7 $ slow 4 sine)
+  # delayfeedback 0.4
+  # delaytime 0.48
+  # orbit 0
+
+d8 $ repeatCycles 4
+  $ chop 16
+  $ sound "<m_organ:2> / 2"
+  # gain 0.7
+  # room 0.9
+  # orbit 3
+
+d9 $ repeatCycles 4
+  $ chop 16
+  $ sound "<m_organ:4>"
+  # gain 0.7
+  # room 0.9
+  # orbit 4
+
+d10
+  $ jux rev 
+  $ chop 16 
+  $ sound "stab:1" 
+  # lpf 800
+  # distort 1 
+  # hpf 200
+  # gain 0.5
+  # orbit 5
+
+hush
+
+d11 $ "<stab:1>" 
+
