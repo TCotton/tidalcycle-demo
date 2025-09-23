@@ -1,0 +1,57 @@
+cps(124/60/4) 
+
+d1 $ sound "<b_perc:0>"
+
+d2 $ sound "<b_bass:0>"
+   # room 0.5
+   # size 0.6
+   # gain 0.8 
+   # pan "0.2 -0.2"
+   # n "0 1"
+
+d3
+  $ slice 4 (slow "2" "[1 2] [3 4]")
+  $ sound "<b_perc:1>"
+  # gain "1.0"
+  # pan "0.2 -0.2"
+  # room "0.3 0.5"
+  # size "0.4 0.5"
+
+hush
+
+d1 $ stack [
+  sound "hh*8 [hh*5 ~]" ,             -- hi-hat / cymbal (bar2 full 8th notes, bar3 first 5 only)
+  sound "~ ~ tom tom ~ ~ ~ ~",        -- toms on beat 3 (bar2)
+  sound "~ sn ~ ~ ~ sn ~ ~",          -- snare on 2
+  sound "bd ~ ~ bd bd ~ ~ ~"          -- bass drum 1, 3, 3+
+]
+
+d1 $ cat [
+  sound "silence",  -- bar 1
+
+  -- bars 2 + 3, wrapped in a loop (repeated 87 times)
+  (stack [
+    -- hi-hat / cymbal
+    sound "hh*8",                -- bar 2 (8th notes)
+    sound "hh hh hh hh hh ~ ~ ~", -- bar 3 (first 5 hits only)
+
+    -- tom
+    sound "~ ~ tom tom ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~", -- bar 2 hit on 3
+    sound "silence",                            -- bar 3 no toms
+
+    -- snare
+    sound "~ sn ~ ~ ~ sn ~ ~ ~ ~ ~ ~ ~ ~",      -- snare on 2 in each bar
+
+    -- kick
+    sound "bd ~ ~ bd bd ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~", -- bar 2
+    sound "bd ~ ~ bd bd ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~"  -- bar 3
+  ]) # loopAt 2 # times 87,
+
+  -- bar 4, repeated twice
+  sound "silence",
+  sound "silence"
+]
+
+hush
+
+d1 $ sound "<b_bass:0><b_perc:1>" # n "0 1" # gain "0.8 0.6"   # pan "0.2 -0.2"  # room "0.3 0.5" # size "0.4 0.6"
