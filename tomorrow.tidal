@@ -1,23 +1,80 @@
 cps(124/60/4) 
 
-d1 $ sound "<b_perc:0>"
+do 
+  let bass = slice 4 (slow "1" "[1 2] [3 4]")
+             $ sound "<b_bass:0>"
+             # room 0.5
+             # size 0.6
+             # gain 0.7 
+             # pan "0.2 -0.2"
+             # sustain 1 
+             # orbit 0
+  let drum = slice 4 (slow "2" "[1 2] [3 4]")
+             $ sound "<b_perc:1>"
+             # gain 0.9
+             # orbit 1
+             # sustain 1
+  let lennon = qtrigger
+             $ loopAt 8
+             $ slice 4 (slow "1" "[1 2 3 4] [5 6 7 8]")
+             $ sound "<b_vocal:0>"
+             # gain 0.7
+             # room 0.2
+             # size 0.2
+             # delay 1
+             # delaytime 0.5
+             # delayfeedback 0.25
+             # orbit 2
+  d1 $ stack [  ]
 
-d2 $ sound "<b_bass:0>"
-   # room 0.5
-   # size 0.6
-   # gain 0.8 
-   # pan "0.2 -0.2"
-   # n "0 1"
-
-d3
-  $ slice 4 (slow "2" "[1 2] [3 4]")
-  $ sound "<b_perc:1>"
-  # gain "1.0"
-  # pan "0.2 -0.2"
-  # room "0.3 0.5"
-  # size "0.4 0.5"
+once $ sound "<b_noise:2>" # gain 0.9 # orbit 7
 
 hush
+
+d2
+   $ qtrigger
+   $ loopAt 8
+   $ sound "<b_vocal:0>"
+   # gain 0.7
+   # room 0.2
+   # size 0.2
+   # delay 1
+   # delaytime 0.5
+   # delayfeedback 0.25
+   # orbit 2
+
+d2 silence
+
+do 
+  let drone = slice 4 (slow "2" "[1 2] [3 4]")
+              $ qtrigger 
+              $ sound "<b_indian:0>"
+              # orbit 3 
+              # gain 0.9
+              # room 0.3
+  let sNoise = sound "<b_noise:0> / 4" 
+              # n ( choose [0,2,4,6] )
+	      # gain 0.5
+	      # room 0.3 
+              # orbit 4
+  let tamb =  sound "<b_perc:0>" 
+	      # gain 0.6
+	      # room 0.3	
+              # orbit 5
+  let sitar = slice 4 (slow "1" "[1 2] [3 4]")
+	      $ sound "~ <b_indian:1>"
+	      # gain 0.6
+	      # room 0.3
+	      # orbit 6
+  d3 $ stack [drone , tamb  ]
+
+hush
+
+once $ sound "<b_watts:0>" # gain 0.9 # orbit 7 
+
+once $ sound "<b_watts:1>" # gain 0.9 # orbit 7
+
+d2 silence
 
 d1 $ stack [
   sound "hh*8 [hh*5 ~]" ,             -- hi-hat / cymbal (bar2 full 8th notes, bar3 first 5 only)
