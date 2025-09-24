@@ -6,8 +6,6 @@ do
              # room 0.5
              # size 0.6
              # gain 0.7 
-             # pan "0.2 -0.2"
-             # sustain 1 
              # orbit 0
   let drum = slice 4 (slow "2" "[1 2] [3 4]")
              $ sound "<b_perc:1>"
@@ -18,16 +16,15 @@ do
              $ loopAt 8
              $ slice 4 (slow "1" "[1 2 3 4] [5 6 7 8]")
              $ sound "<b_vocal:0>"
-             # gain 0.7
+             # gain 0.6
              # room 0.2
              # size 0.2
              # delay 1
-             # delaytime 0.5
-             # delayfeedback 0.25
+             # delaytime 0.2
              # orbit 2
-  d1 $ stack [  ]
+  d1 $ stack [ drum , base  ] 
 
-once $ sound "<b_noise:2>" # gain 0.9 # orbit 7
+once $ sound "<b_noise:2> * 4" # gain 0.8 # orbit 7
 
 hush
 
@@ -40,7 +37,7 @@ d2
    # size 0.2
    # delay 1
    # delaytime 0.5
-   # delayfeedback 0.25
+   # delayfeedback 0.2
    # orbit 2
 
 d2 silence
@@ -54,7 +51,7 @@ do
               # room 0.3
   let sNoise = sound "<b_noise:0> / 4" 
               # n ( choose [0,2,4,6] )
-	      # gain 0.5
+	      # gain 0.6 
 	      # room 0.3 
               # orbit 4
   let tamb =  sound "<b_perc:0>" 
@@ -66,7 +63,7 @@ do
 	      # gain 0.6
 	      # room 0.3
 	      # orbit 6
-  d3 $ stack [drone , tamb  ]
+  d3 $ stack [ drone ]
 
 hush
 
