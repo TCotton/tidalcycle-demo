@@ -16,8 +16,8 @@ do
   let drumz5 = sound "[<techno:3> <techno:2>] *2"
             # orbit 4 -- routed to audiochannel 9-10
   let cym    = fast 2 $ sound "ho:4 hc ho:4 hc" # gain 0.45 # cut 1  # orbit 0 
-  d1 $ stack [ drumz1  ] 
-	   --  # krush 6 # shape 0.3 # room 1 # gain 0.4 # delaytime (range 1.2 0.5 $ fast 4 sine)
+  d1 $ stack [ drumz3 ] 
+	  --    # krush 6 # shape 0.3 # room 1 # gain 0.4 # delaytime (range 1.2 0.5 $ fast 4 sine)
 
 hush
 
@@ -68,7 +68,7 @@ hush
 
 unsolo 3
 
-d2 silence
+d3 silence
 
 hush
 
@@ -79,12 +79,12 @@ let spread1    = (spread ($) [jux rev, rev])
     juxrev     = jux rev
     revEffect  = rev
     palindrom  = palindrome
-    fadeOut    = range 1 0 $ slow 16 saw
-    in d4 $ stack [( -- in xfadeIn 1 1 $ stack [(
+    fadeOut    = range 1 0 $ slow 16 saw 
+    in d3 $ stack [( -- in xfadeIn 1 1 $ stack [(
       slow 2
       $ chop 32
       $ sound "piano_c"
-      # gain fadeOut 
+      # gain 0.6
       # room 1.0
       # orbit 7 -- routed to audiochannel 15-16
       )]

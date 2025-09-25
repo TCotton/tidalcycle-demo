@@ -3,26 +3,27 @@ cps(124/60/4)
 do 
   let bass = slice 4 (slow "1" "[1 2] [3 4]")
              $ sound "<b_bass:0>"
-             # room 0.5
-             # size 0.6
+             # room 0.3
              # gain 0.7 
              # orbit 0
   let drum = slice 4 (slow "2" "[1 2] [3 4]")
              $ sound "<b_perc:1>"
              # gain 0.9
+             # room 0.2
+	     # size 0.2
              # orbit 1
   let lennon = qtrigger
              $ loopAt 8
              $ slice 4 (slow "1" "[1 2 3 4] [5 6 7 8]")
              $ sound "<b_vocal:0>"
-             # gain 0.6
+             # gain 0.5
              # room 0.2
              # size 0.2
-             # delay 1
+             # delay 2
              # delaytime 0.2
 	     # delayfeedback 0.2
              # orbit 2
-  d1 $ stack [ bass , drum ] 
+  d1 $ stack [ bass , drum  ] 
 
 once $ sound "<b_noise:2> * 4" # gain 0.8 # orbit 7
 
@@ -40,11 +41,12 @@ d2
    # delay 1
    # delaytime 0.2
    # delayfeedback 0.2
+   # lock 1
    # orbit 2
 
 d2 silence
 
-do 
+do
   let drone = slice 4 (slow "2" "[1 2] [3 4]")
               $ qtrigger 
               $ sound "<b_indian:0>"
@@ -57,12 +59,12 @@ do
 	      # room 0.3 
               # orbit 4
   let tamb =  sound "<b_perc:0>" 
-	      # gain 0.6
+	      # gain 0.5
 	      # room 0.3	
               # orbit 5
   let sitar1 = slice 4 (slow "1" "[1 2] [3 4]")
 	      $ sound "~ <b_indian:1>"
-	      # gain 0.5 
+	      # gain 0.4
 	      # room 0.3
 	      # orbit 6
               # leslie 1
@@ -71,22 +73,22 @@ do
 	      # gain 0.5
 	      # room 0.3
 	      # leslie 2
-	      # pan "-0.5 0.5"
 	      # orbit 0
   let tablar = slice 8 (slow "1" "[1 2] [3 4]")
               $ jux palindrome  
               $ sound "<b_indian:3>"
 	      # gain 0.7
-              # pan "-0.5 0.5"
 	      # room 0.3
               # leslie 4
 	      # orbit 2 
-  d3 $ stack [ drone ]
+  d3 $ stack [ drone ] 
 
 hush
+
+d1 silence 	
 
 once $ sound "<b_watts:0>" # gain 0.9 # orbit 7 
 
 once $ sound "<b_watts:1>" # gain 0.9 # orbit 7
 
-d2 silence
+d2 silence 
