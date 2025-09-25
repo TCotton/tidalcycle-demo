@@ -1,0 +1,8 @@
+cps(130/60/4)
+
+d1 
+ $ loopAt 1.5
+ $ slice 2 (slow "1" "[1-2]")
+ $ sound "<p_drums:0>"
+
+hush

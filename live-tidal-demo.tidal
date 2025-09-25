@@ -93,7 +93,7 @@ hush
 
 d4 silence -- piano sample
 
-xfadeIn 4 2 -- d5 
+xfadeIn 3 2 -- d5 
   $ note "f e'min d'min c [10,14,17] a'min g'min f"
   # sound "<sf:1>"
   # nudge 1.5
