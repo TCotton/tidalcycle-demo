@@ -7,6 +7,7 @@ do
              # gain 0.7 
              # orbit 0
   let drum = slice 4 (slow "2" "[1 2] [3 4]")
+             $ qtrigger 
              $ sound "<b_perc:1>"
              # gain 0.9
              # room 0.2
@@ -55,7 +56,7 @@ do
               # room 0.3
   let sNoise = sound "<b_noise:0> / 4" 
               # n ( choose [0,2,4,6] )
-	      # gain 0.65
+	      # gain 0.5
 	      # room 0.3 
               # orbit 4
   let tamb =  sound "<b_perc:0>" 
@@ -77,7 +78,7 @@ do
   let tablar = slice 8 (slow "1" "[1 2] [3 4]")
               $ jux palindrome  
               $ sound "<b_indian:3>"
-	      # gain 0.7
+	      # gain 0.6 
 	      # room 0.3
               # leslie 4
 	      # orbit 2 
