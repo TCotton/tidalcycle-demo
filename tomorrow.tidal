@@ -71,15 +71,16 @@ do
 	      # gain 0.5
 	      # room 0.3	
               # orbit 5
+              # pan "-0.5 0.5"
   let sitar1 = slice 4 (slow "1" "[1 2] [3 4]")
 	      $ sound "~ <b_indian:1>"
 	      # gain 0.4
 	      # room 0.3
 	      # orbit 6
               # leslie 1
-  let sitar2 = slice 4 (slow "1" "[1 2] [3 4]")
+  let sitar2 = slice 1 (slow "1" "[1 2] [3 4]")
 	      $ sound "~ ~ ~ <b_indian:2>"
-	      # gain 0.5
+	      # gain 0.3
 	      # room 0.3
 	      # leslie 2
 	      # orbit 0
