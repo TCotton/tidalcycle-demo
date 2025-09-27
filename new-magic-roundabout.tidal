@@ -8,7 +8,7 @@ do
             # orbit 0
   let drum1 = sound "<reverbkick:0> * 4" -- reverbkick:0 -- techno:1
             # room 0.5 
-            # gain 0.8
+            # gain 0.5
             # orbit 1
   let d808 = sound "[<808:0><808:1>] * 2"
             # room 0.5
@@ -27,9 +27,16 @@ do
 	    # gain 0.7
 	    # legato 4
 	    # orbit 4 
-  d1 $ stack [ techno4, d808 ] 
+  d1 $ stack [ drum1 ]
 
 once $ sound "<m_bowie:2>" # orbit 5
+
+d3 
+  $ qtrigger
+  $ loopAt 4
+  $ slice 4 (slow "1" "1 ~ ~ 4")
+  $ sound "<m_bass:0>
+  # orbit 4 
 
 hush
 
@@ -38,10 +45,10 @@ do
 	    # room 0.9
 	    # size 0.3
 	    # gain (range 0.3 0.5 $ slow 4 sine)
-	  --  # delayfeedback 0.4
-	  --  # delaytime 0.48
-          --  # lpf 2000 # lpq 0.6
-	  --  # hpf 800  # hpq 0.1
+	    # delayfeedback 0.4
+	    # delaytime 0.48
+            # lpf 2000 # lpq 0.6
+	    # hpf 800  # hpq 0.1
 	    # orbit 5
   let organ3 = qtrigger 
 	    $ splice 8 (slow "1 2" "1 2 3 4")
@@ -62,9 +69,10 @@ do
 	    # distort 1 
 	    # gain 0.4
 	    # orbit 5 
-  d2 $ stack [ arpyz, organ3 , techno5 ] 
+  d2 $ stack [ arpyz , organ3 , techno5 ] 
 
 hush
+
 
 xfadeIn 1 8 
   $ qtrigger
