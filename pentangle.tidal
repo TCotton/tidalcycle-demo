@@ -1,8 +1,15 @@
 cps(130/60/4)
 
-d1 
- $ loopAt 1.5
- $ slice 2 (slow "1" "[1-2]")
- $ sound "<p_drums:0>"
-
-hush
+d1
+ $ every 2 (fast 2)
+ $ loopAt 3
+ $ slice 1 (slow "1" "[1-2]")
+ $ sound "<p_drums:0> * 1"
+ # gain 0.8
+ # legato 5
+ # room 0.7
+ # size 0.7
+ # shape 0.5 
+ # orbit 0
+ 
+hush 
