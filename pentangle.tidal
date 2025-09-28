@@ -11,5 +11,8 @@ d1
  # size 0.7
  # shape 0.5 
  # orbit 0
+
+d1 $ s "superchip*8" # n (quantise 1 $ range (-10) (10) $ slow 8 $ cosine)
+                     # release (quantise 5 $ slow 8 $ sine + 0.1)
  
 hush 

@@ -1,0 +1,9 @@
+cps(107/60/4)
+
+d1
+ $ loopAt 2.5
+ $ sound "<s_beat:0>"
+ # gain 0.8
+ # orbit 0 
+
+hush
