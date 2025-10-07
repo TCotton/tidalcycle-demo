@@ -71,7 +71,6 @@ d4 $ qtrigger
   # size 0.6
   # orbit 5
 
-  -- 3️⃣ Optional bass pulse (supports the chords)
 d5 $ n "f2 f2 f2 f2" # sound "bass:0"
     # gain 0.6
     # sustain 0.3
@@ -84,7 +83,7 @@ d6
  $ chop 4
  $ sound "<jw_short_vocals:0>/2"
  # orbit 5
- # gain 0.5
+ # gain 0.55
  # distort 0.5
  # room 0.9
  # size 0.7
@@ -93,40 +92,3 @@ d6
 
 d6 silence
 
-d7
-  $ qtrigger
-  $ loopAt 1.5
-  $ sound "<jw_short_vocals:0>/2"
-  # orbit 2
-  # delay "0.02"
-
-hush
-
-let pats =
-      [ ("a", loopAt 1.5 $ sound "<jw_short_vocals:0>")
-      , ("b", loopAt 1 $ sound "<jw_short_vocals:1>")
-      ]
-in
-d4 $ ur 4 "a b" pats [] # orbit 2 # gain 0.8
-
-d5 $ qtrigger $ seqP [
-     (0, 4, sound "<jw_vocals:0>")
-   , (8, 12, sound "<jw_vocals:1>")
-   , (16, 20, sound "<jw_vocals:2>")
-   , (24, 28, sound "<jw_vocals:3>")
-]  # orbit 2 # gain 0.6 # distort 0.4 # room 0.5 # size 0.5
-
-d1 $ qtrigger $ seqP [
-  (0, 1, sound "<jw_short_vocals:0>" # cut 1),
-  (2, 3, sound "<jw_short_vocals:1>" # cut 1)
-] # orbit 0
-
-
-hush
-
-
-d7 $ sound "special_drum_loop"
-
-panic
-
-d4 silence
