@@ -1,0 +1,29 @@
+-- 1️⃣  Drums: steady 4/4 foundation
+d1 $ stack [
+    sound "bd hh sn hh" # gain 1.0,
+    sound "bd" # speed 0.95 # pan 0.1
+  ] # orbit 0
+
+hush
+
+-- 2️⃣  Long Vocal Phrase (plays once, in full)
+-- Assume the sample lasts roughly 8 cycles
+d2 $ qtrigger $ seqP
+  [ (0, 13, sound "<jw_long_vocals:0>" # sustain 13 # cut 1)
+  ]
+  # orbit 1
+  # gain 0.9
+  # room 0.4 # size 0.8 # dry 0.6
+
+
+-- 3️⃣  Chopped, rhythmic vocal layer looping underneath
+d3 $ every 2 (rev)
+  $ splice 8 "0 1 2 3" $ sound "<jw_long_vocals:0>"
+  # speed 1.0
+  # gain 0.75
+  # orbit 2
+  # shape 0.3
+  # delay "0.02"
+
+-- 4️⃣  Ambient pad (optional texture)
+d4 $ slow 4 $ sound "pad:0" # gain 0.6 # room 0.6 # size 0.9 # orbit 3

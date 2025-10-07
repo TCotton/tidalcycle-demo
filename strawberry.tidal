@@ -6,4 +6,12 @@ d1
  # gain 0.8
  # orbit 0 
 
+d2 
+ $ slow 2 
+ $ note "<c3 e3 g3 b2>:0"
+ # sound "<bass:0>"
+ # gain 0.6
+ # orbit 0.1 
+ # room 0.5 
+
 hush
