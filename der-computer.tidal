@@ -2,16 +2,11 @@ cps(130/60/4)
 
 d1
  $ qtrigger
- $ loopAt "2 8"
- $ sound "[<jw_drums:0><jw_drums:5>]"
- # gain "0.3 0.6"
+ $ loopAt "8"
+ $ sound "[<jw_drums:5>]"
+ # gain "0.8"
  # orbit 0
 --  # sustain 4
--- # room 0.9
--- # size 0.9
--- # legato 2
--- # cutoff 2000
--- # resonance 0.6
 
 hush
 
@@ -39,17 +34,19 @@ do
 	     # gain 0.4
              # room 0.8
              # pan ( slow 8 $ sine )
-  d2 $ stack [ drumz1, sounds1 , sounds2 , drumz2 ]
+  d2 $ stack [ drumz1, drumz2  ]
 
 d2 silence
 
-hush
+solo 3
 
-once $ qtrigger $ loopAt 12 $ sound "<jw_long_vocals:0>" # unit "s" # sustain 28
+hush 
+
+unsolo 3  
 
 d3 $ qtrigger
   $ seqP
-      [ (0, 30, chop 16 $ sound "<jw_long_vocals:0>/2" # sustain 13 # cut 1) ]
+      [ (0, 40, chop 16 $ sound "<jw_long_vocals:0>/2" # sustain 13 # cut 1) ]
   # orbit 4
   # gain 0.55
   # room 1.2
