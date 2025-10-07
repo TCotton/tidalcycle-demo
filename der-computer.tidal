@@ -4,8 +4,9 @@ d1
  $ qtrigger
  $ loopAt "2 8"
  $ sound "[<jw_drums:0><jw_drums:5>]"
- # gain "0.6"
- # sustain 4
+ # gain "0.3 0.6"
+ # orbit 0
+--  # sustain 4
 -- # room 0.9
 -- # size 0.9
 -- # legato 2
@@ -25,7 +26,22 @@ do
              # gain 0.8
              # hpf 300
              # resonance 0.5
-  d2 $ stack [ drumz1 ]
+  let sounds1 = sound "<techno:5>*4"
+             # orbit 2
+             # gain 0.4
+	     # resonance 0.5
+             # room 0.8
+    	     # size 0.8
+             # legato 4
+             # pan ( slow 4 $ sine )
+  let sounds2 = sound "<stomp:0>*16"
+	     # orbit 3
+	     # gain 0.4
+             # room 0.8
+             # pan ( slow 8 $ sine )
+  d2 $ stack [ drumz1, sounds1 , sounds2 , drumz2 ]
+
+d2 silence
 
 hush
 
@@ -33,13 +49,13 @@ once $ qtrigger $ loopAt 12 $ sound "<jw_long_vocals:0>" # unit "s" # sustain 28
 
 d3 $ qtrigger
   $ seqP
-      [ (0, 13, sound "<jw_long_vocals:0>" # sustain 13 # cut 1) ]
-  # orbit 2
-  # gain 0.6
+      [ (0, 30, chop 16 $ sound "<jw_long_vocals:0>/2" # sustain 13 # cut 1) ]
+  # orbit 4
+  # gain 0.55
   # room 1.2
   # size 0.9
   # dry 1.5
-  # delay "-0.2"
+  # delay "0.2"
 
 hush
 
@@ -53,7 +69,7 @@ d4 $ qtrigger
   # sustain 0.8
   # room 0.4
   # size 0.6
-  # orbit 3
+  # orbit 5
 
   -- 3️⃣ Optional bass pulse (supports the chords)
 d5 $ n "f2 f2 f2 f2" # sound "bass:0"
@@ -61,14 +77,14 @@ d5 $ n "f2 f2 f2 f2" # sound "bass:0"
     # sustain 0.3
     # cutoff 1000
     # lpf 1200
-    # orbit 4
+    # orbit 6
 
 d6
  $ qtrigger
  $ chop 4
- $ sound "<jw_short_vocals:0>"
+ $ sound "<jw_short_vocals:0>/2"
  # orbit 5
- # gain 0.4
+ # gain 0.5
  # distort 0.5
  # room 0.9
  # size 0.7
@@ -80,7 +96,7 @@ d6 silence
 d7
   $ qtrigger
   $ loopAt 1.5
-  $ sound "<jw_short_vocals:0>"
+  $ sound "<jw_short_vocals:0>/2"
   # orbit 2
   # delay "0.02"
 
