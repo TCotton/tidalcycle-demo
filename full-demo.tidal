@@ -1,0 +1,186 @@
+cps (120/60/4)
+
+-- drum patterns in do block
+
+do
+  let drumz1 = every 4 (|> sound "drum")
+            $ sound "[drum <dr:2>] drum *2"
+            # gain 0.7
+            # orbit 0 -- routed to audiochannel 1-2
+  let drumz2 = sound "[drum <dr:1>] drum [drum <techno:5>] drum /2"
+            # orbit 1 -- routed to audiochannel 3-4
+  let drumz3 = sound "<techno:1> *4"
+            # orbit 2 -- routed to audiochannel 52-6
+  let drumz4 = sound "co"
+            # orbit 3 -- routed to audiochannel 7-8
+  let drumz5 = sound "[<techno:3> <techno:2>] *2"
+            # orbit 4 -- routed to audiochannel 9-10
+  let cym    = fast 2 $ sound "ho:4 hc ho:4 hc" # gain 0.45 # cut 1  # orbit 0
+  d1 $ stack [ drumz1 ]
+	  -- # krush 6 # shape 0.3 # room 1 # gain 0.6 # delaytime (range 1.2 0.5 $ fast 4 sine)
+
+hush
+
+d1 silence -- beats
+
+d2 silence -- piano intro
+
+d3 silence -- uses fadeIn can't be silenced unless change first line of code
+
+d4 silence -- piano sample
+
+-- Reproduction of piano intro
+
+d2
+  $ note "f e'min d'min c [10,14,17] a'min g'min f"
+  # sound "<bass3:0>"
+  # sustain 0.1
+  # room 0.9
+  # size 0.3
+  # gain 0.6
+  # orbit 5 -- routed to audiochannel 11-12
+
+hush
+
+d1 silence -- beats
+
+d2 silence -- piano intro
+
+d3 silence -- piano four
+
+-- vocal sample
+
+xfadeIn 1 4
+  $ slow 4
+  $ loopFirst
+  $ chew 4 "0 1*2 2*2 [~ 2]"
+  $ ghost' (1/4)
+  $ sound "<vocals_c:2>"
+  # gain 0.65
+  # room 2.0
+  # crush 4
+  # ring 0.5
+  # orbit 6 -- routed to audiochannel 13-14
+
+solo 3
+
+hush
+
+unsolo 3
+
+d3 silence
+
+hush
+
+-- piano sample
+
+let spread1    = (spread ($) [jux rev, rev])
+    spread2    = spread ($) [density 2, rev, slow 2, striate 3, (# speed "0.8")]
+    juxrev     = jux rev
+    revEffect  = rev
+    palindrom  = palindrome
+    fadeOut    = range 0.55 0 $ slow 16 saw
+    in d3 $ stack [( -- in xfadeIn 1 1 $ stack [(
+      slow 2
+      $ chop 16
+      $ sound "piano_c"
+      # nudge 0.5
+      # gain 0.55
+      # room 1.0
+      # orbit 7 -- routed to audiochannel 15-16
+      )]
+
+hush
+
+d4 silence -- piano sample
+
+xfadeIn 3 2 -- d5
+  $ note "f e'min d'min c [10,14,17] a'min g'min f"
+  # sound "<sf:1>"
+  # nudge 1.5
+  # room 1.0
+  # gain silence
+  # lpf (range 100 700 $ slow 8 sine)
+  # lpq 0.5
+  # sustain 4
+  # orbit 6 -- routed to audiochannel 13-14
+
+
+d5
+  $ qtrigger
+  $ loopAt "8"
+  $ sound "[<jw_drums:5>]"
+  # gain "0.8"
+  # orbit 2
+  --  # sustain 4
+
+  hush
+
+d5 silence
+
+do
+  let drumz1 = sound "[<jw_drum_one_hit:4><808:4>]*4"
+               # orbit 3
+               # gain 0.8
+  let drumz2 = sound "[<jw_drum_one_hit:4><808:4>]*4"
+               # orbit 3
+  let sounds1 = sound "<techno:5>*4"
+               # orbit 0
+  let sounds2 = sound "<stomp:0>*16"
+  	       # orbit 1
+  d6 $ stack [ drumz1 ]
+
+d5 silence
+
+d6 silence
+
+d3 silence
+
+solo 3
+
+unsolo 3
+
+d7 $ qtrigger
+    $ seqP
+        [ (0, 40, chop 16 $ sound "<jw_long_vocals:0>/2" # sustain 13 # cut 1) ]
+    # orbit 2
+    # gain 0.6
+    # room 1.2
+    # size 0.9
+    # dry 1.5
+    # delay "0.2"
+
+ hush
+
+d8 $ qtrigger
+    $ note "f'minor7 [49, 53, 56, 60] [51, 54, 58, 61] f'minor7"
+    # sound "<bass:0>"
+    # legato 1.2
+    # cutoff 2000
+    # resonance 0.3
+    # gain 0.7
+    # sustain 0.8
+    # room 0.4
+    # size 0.6
+    # orbit 5
+
+d9 $ n "f2 f2 f2 f2" # sound "bass:0"
+    # gain 0.6
+    # sustain 0.3
+    # cutoff 1000
+    # lpf 1200
+    # orbit 6
+
+d10
+    $ qtrigger
+    $ chop 4
+    $ sound "<jw_short_vocals:0>/2"
+    # orbit 7
+    # gain 0.55
+    # distort 0.5
+    # room 0.9
+    # size 0.7
+    # sustain 4
+    # pan "-0.5 0.5"
+
+d10 silence

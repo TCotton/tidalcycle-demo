@@ -18,37 +18,27 @@ do
              # gain 0.8
   let drumz2 = sound "[<jw_drum_one_hit:4><808:4>]*4"
              # orbit 1
-             # gain 0.8
-             # hpf 300
-             # resonance 0.5
   let sounds1 = sound "<techno:5>*4"
              # orbit 2
-             # gain 0.4
-	     # resonance 0.5
-             # room 0.8
-    	     # size 0.8
-             # legato 4
-             # pan ( slow 4 $ sine )
   let sounds2 = sound "<stomp:0>*16"
 	     # orbit 3
-	     # gain 0.4
-             # room 0.8
-             # pan ( slow 8 $ sine )
-  d2 $ stack [ drumz1, drumz2  ]
+  d2 $ stack [ drumz1 ]
+
+d1 silence
 
 d2 silence
 
+d3 silence
+
 solo 3
 
-hush 
-
-unsolo 3  
+unsolo 3
 
 d3 $ qtrigger
   $ seqP
       [ (0, 40, chop 16 $ sound "<jw_long_vocals:0>/2" # sustain 13 # cut 1) ]
   # orbit 4
-  # gain 0.55
+  # gain 0.6
   # room 1.2
   # size 0.9
   # dry 1.5
@@ -88,4 +78,3 @@ d6
  # pan "-0.5 0.5"
 
 d6 silence
-
