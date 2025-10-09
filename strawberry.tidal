@@ -1,10 +1,46 @@
 cps(107/60/4)
 
-d1
- $ loopAt 2.5
- $ sound "<s_beat:0>"
- # gain 0.8
- # orbit 0 
+
+
+do
+  let drumz1 = loopAt 2.5
+            $ sound "<s_beat:0>"
+            # gain 0.9
+            # dry 0.5
+            # orbit 0 
+  let drumz2 = loopAt 2.5
+	    $ sound "<s_beat:4>"
+            # gain 0.5
+            # room 0.3
+            # orbit 1 
+            # sustain 1
+            # pan "-0.5 0.5"
+  d1 $ qtrigger $ stack [drumz1, drumz2]
+
+d1 silence 
+
+
+d1 silence
+
+hush
+
+hush
+
+d2 
+ $ qtrigger
+ $ loopAt 2.5 
+ $ sound "[<rm:0>*2]"
+ # gain 1.0
+ # legato 1
+ # room 0.3
+ # size 0.5 
+ # orbit 1
+ # delay "1.8" 
+
+hush
+
+d2 
+ $ sound "<bass:0>"
 
 d2 
  $ slow 2 
