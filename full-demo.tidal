@@ -118,16 +118,18 @@ d5
 d5 silence
 
 do
-  let drumz1 = sound "[<jw_drum_one_hit:4><808:4>]*4"
+  let drumz1 = superimpose
+                    (\_ -> (sound "reverbkick*4") * (slow 2 $ segment 2 "[0 1]"))
+                    (sound "[<jw_drum_one_hit:5><808:4>]*4")
                # orbit 3
                # gain 0.8
-  let drumz2 = sound "[<jw_drum_one_hit:4><808:4>]*4"
+  let drumz2 = sound "[<jw_drum_one_hit:4><ifdrums:1>]*4"
                # orbit 3
   let sounds1 = sound "<techno:5>*4"
                # orbit 0
   let sounds2 = sound "<stomp:0>*16"
   	       # orbit 1
-  d6 $ stack [ drumz1 ]
+  d6 $ stack [ drumz1, drumz2 ]
 
 d5 silence
 
@@ -135,7 +137,7 @@ d6 silence
 
 d7 silence
 
-solo 7 
+solo 7
 
 unsolo 7
 
