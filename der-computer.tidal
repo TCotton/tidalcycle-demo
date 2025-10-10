@@ -2,9 +2,9 @@ cps(130/60/4)
 
 d1
  $ qtrigger
- $ loopAt "8"
- $ sound "[<jw_drums:5>]"
- # gain "0.8"
+ $ loopAt "2 8"
+ $ sound "[<jw_drums:0><jw_drums:5>]"
+ # gain "0.4 0.7"
  # orbit 0
 --  # sustain 4
 
@@ -13,19 +13,31 @@ hush
 d1 silence
 
 do
-  let drumz1 = ssuperimpose
+  let drumz1 = superimpose
                    (\_ -> (sound "reverbkick*4") * (slow 2 $ segment 2 "[0 1]"))
                    (sound "[<jw_drum_one_hit:5><808:4>]*4")
              # orbit 3
              # orbit 1
              # gain 0.8
   let drumz2 = sound "[<jw_drum_one_hit:4><ab:2>]*4"
+             # gain 0.8
+             # hpf 300
+             # resonance 0.5
              # orbit 1
   let sounds1 = sound "<techno:5>*4"
+             # gain 0.4
+             # resonance 0.5
+             # room 0.8
+             # size 0.8
+             # legato 4 
+             # pan (slow 4 $ sine)
              # orbit 2
   let sounds2 = sound "<stomp:0>*16"
+             # gain 0.4
+             # room 0.8
+             # pan (slow 4 $ sine)
 	     # orbit 3
-  d2 $ stack [ drumz1 ]
+  d2 $ stack [ drumz1, drumz2 , sounds1 , sounds2 ]
 
 d1 silence
 
@@ -73,7 +85,7 @@ d6
  $ chop 4
  $ sound "<jw_short_vocals:0>/2"
  # orbit 5
- # gain 0.55
+ # gain 0.5 
  # distort 0.5
  # room 0.9
  # size 0.7
