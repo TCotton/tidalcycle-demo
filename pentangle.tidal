@@ -5,14 +5,19 @@ d1
  $ loopAt 3
  $ slice 1 (slow "1" "[1-2]")
  $ sound "<p_drums:0> * 1"
- # gain 0.8
+ # gain 0.4
  # legato 5
  # room 0.7
  # size 0.7
  # shape 0.5 
  # orbit 0
 
-d1 $ s "superchip*8" # n (quantise 1 $ range (-10) (10) $ slow 8 $ cosine)
-                     # release (quantise 5 $ slow 8 $ sine + 0.1)
+d2 $ qtrigger
+ $ striate 1
+ $ slice 1 (slow "2" "[0]") 
+ $ sound "<p_bass:0>"
+ # gain 1.0
+ # cut 1
+ # orbit 1
  
 hush 
