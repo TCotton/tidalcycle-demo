@@ -13,10 +13,13 @@ hush
 d1 silence
 
 do
-  let drumz1 = sound "[<jw_drum_one_hit:4><808:4>]*4"
+  let drumz1 = ssuperimpose
+                   (\_ -> (sound "reverbkick*4") * (slow 2 $ segment 2 "[0 1]"))
+                   (sound "[<jw_drum_one_hit:5><808:4>]*4")
+             # orbit 3
              # orbit 1
              # gain 0.8
-  let drumz2 = sound "[<jw_drum_one_hit:4><808:4>]*4"
+  let drumz2 = sound "[<jw_drum_one_hit:4><ab:2>]*4"
              # orbit 1
   let sounds1 = sound "<techno:5>*4"
              # orbit 2
