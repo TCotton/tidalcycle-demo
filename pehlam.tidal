@@ -1,0 +1,54 @@
+cps(120/60/4)
+
+d1 $ qtrigger $ seqP
+  [ (0, 22.6,
+      every 2 (fast "2")
+      $ loopAt 1.4
+      $ slice 2 (fast "1" "[1-2]")
+      $ sound "<pDrums:0>*2"
+      # gain 0.8
+      # room 0.7
+      # size 0.7
+      # shape "0 0 0.5"
+      # orbit 0
+    )
+  , (0, 22.6,
+      loopAt 2.8
+      $ slice 2 (fast "1" "[1-2]")
+      $ sound "<pDrums:3>"
+      # orbit 1
+      # gain 0.7
+      # room 0.7
+      # size 0.7
+      # legato 1
+    )
+  , (22.4, 23.8,
+      loopAt 1.4
+      $ sound "<pDrums:2>"
+      # orbit 2
+      # gain 0.8
+      # room 1.0
+      # size 0.7
+      # legato 1
+      # sustain 2
+    )
+  ]
+
+once $ qtrigger
+     $ sound "<pVocals:0>"
+     # dry 1
+     # gain 0.7
+     # orbit 3
+
+once $ qtrigger
+     $ sound "<pVocals:2>"
+     # dry 1
+     # gain 0.7
+     # orbit 4
+
+once $ sound "<pVocals:1>"
+     # dry 1
+     # gain 0.7
+     # orbit 5
+
+hush

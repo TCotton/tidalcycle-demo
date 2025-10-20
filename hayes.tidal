@@ -1,0 +1,44 @@
+cps(120/60/4)
+
+d1
+ $ qtrigger
+ $ loopAt 4
+ $ chop 16
+ $ splice 4 (fast "3" "[1-2]")
+ $ rev
+ $ sound "<hPiano:0>"
+ # room 0.5
+ # gain 1.0
+ # sustain 8
+ # dry 1
+ # delay 1
+ # orbit 0
+
+ d2
+  $ chop 16
+  $ splice 4 (fast "3" "[1-2]")
+  $ sound "<808:4>*4"
+  # gain 0.6
+  # orbit 1
+
+d2 silence
+
+panic
+
+d3
+  $ loopAt 3
+  $ sound "<bVocals:0>"
+  # orbit 2
+
+d3 silence
+
+d3
+  $ qtrigger
+  $ sound "<hVocals:1>"
+  # room 1
+  # gain 0.6
+  # orbit 3
+
+d3 silence
+
+hush

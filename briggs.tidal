@@ -1,0 +1,74 @@
+cps(120/60/4)
+
+hush
+
+d1 $ qtrigger
+  $ chop 4
+  $ slice 10 (slow "1" "[1-2]")
+  $ sound "<bVocals:0>"
+  # gain 0.6
+  # orbit 0
+
+d2 $ qtrigger
+  $ chop 4
+  $ slice 12 (slow "1" "[1-2]")
+  $ sound "<bVocals:1>"
+  # gain 0.6
+  # orbit 0
+
+d3
+  $ sound "<bDrums:0> * 4"
+  # gain 0.7
+  # orbit 1
+
+hush
+
+d5
+  $ sound "<bSynth:2>"
+  # gain 0.7
+  # orbit 2
+
+hush
+
+d3 silence
+
+d4
+  $ sound "<bVocals:1>"
+  # gain 0.7
+  # orbit 3
+
+d4 silence
+
+hush
+
+d1 silence
+
+d2
+  $ sound "<bVocals:1>"
+
+d2 silence
+
+
+
+
+
+
+d6 $ sound "<bSynth:4>"
+
+d7 $ stack [
+  sound "bd*4",                                          -- 4-on-the-floor kick
+  off 0.25 (|+| speed "0.5") $ sound "cp(3,8)",          -- syncopated clap pattern
+  slow 2 $ sound "<bSynth:0>*8" # gain 0.7 # speed "[1 1.2]",  -- hi-hats with slight pitch drift
+  n (scale "minor" "e3 [e3 g3 a3 b3 e4 g4 a4 b4]")       -- melodic notes from E minor
+    # s "synth"
+    # cut 1
+    # legato 1.5
+    # gain 0.8
+    # pan (slow 4 $ sine)                              -- subtle stereo movement
+]
+
+d8 $ loopAt 1.5
+  $ s "<bSynth:0>"
+  # gain 0.9
+
+hush
