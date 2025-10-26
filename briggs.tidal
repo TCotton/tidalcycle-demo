@@ -10,11 +10,13 @@ d1 $ qtrigger
   # orbit 0
 
 d2 $ qtrigger
-  $ chop 4
-  $ slice 12 (slow "1" "[1-2]")
+  $ chop 8
+  $ slice 8 (slow "1" "[1-2]")
   $ sound "<bVocals:1>"
-  # gain 0.6
+  # gain 0.5
   # orbit 0
+
+d2 silence
 
 d3
   $ sound "<bDrums:0> * 4"
@@ -24,8 +26,13 @@ d3
 hush
 
 d5
-  $ sound "<bSynth:2>"
-  # gain 0.7
+  $ sound "<bSynth:3>"
+  # gain 1
+  # orbit 2
+
+d5
+  $ sound "<bSynth:4>"
+  # gain 1
   # orbit 2
 
 hush
@@ -44,7 +51,9 @@ hush
 d1 silence
 
 d2
-  $ sound "<bVocals:1>"
+  $ sound "<bVocals:2>"
+  # gain 0.7
+  # orbit 3
 
 d2 silence
 

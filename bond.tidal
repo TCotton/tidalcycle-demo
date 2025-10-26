@@ -1,0 +1,55 @@
+cps(109/60/4)
+
+d1
+ $ loopAt 2.5
+ $ sound "<GB_Drums:0>"
+ # room 1
+ # gain 0.8
+ # size 0.6
+ # cut 1
+ # orbit 0
+
+hush
+
+d2
+ $ qtrigger
+ $ loopAt 5
+ $ sound "<GB_Bass:0>"
+ # gain 0.8
+ # orbit 1
+
+d3
+ $ qtrigger
+ $ (0 <~)
+ $ loopAt 5
+ $ sound "<GB_Strings:0>"
+ # gain 0.8
+ # orbit 2
+ # lpf (range 800 5000 $ fast 4 saw)
+ # lpq 0.3
+
+panic
+
+ -- # sustain 12
+
+panic
+
+d1 silence
+
+d2
+ $ loopAt 2.5
+ $ sound "<GB_Drums:0>"
+ # room 1
+ # gain 0.6
+ # size 0.6
+ # cut 1
+ # lpq 0.3
+ # orbit 2
+
+d1 silence
+
+d2 silence
+
+hush
+
+panic
