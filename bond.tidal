@@ -2,14 +2,23 @@ cps(109/60/4)
 
 d1
  $ loopAt 2.5
- $ sound "<GB_Drums:0>"
+ $ sound "<GB_Drums:1>"
  # room 1
  # gain 0.8
  # size 0.6
  # cut 1
  # orbit 0
 
-hush
+once $ sound "<GB_Sounds:0>"
+ # gain 0.85
+ # orbit 1
+
+do
+  panic
+  once $ sound "<GB_Sounds:1>" # gain 1 # orbit 1
+
+
+panic
 
 d2
  $ qtrigger

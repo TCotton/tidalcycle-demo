@@ -3,27 +3,86 @@ cps(120/60/4)
 hush
 
 d1 $ qtrigger
-  $ chop 4
-  $ slice 10 (slow "1" "[1-2]")
-  $ sound "<bVocals:0>"
-  # gain 0.6
+  $ seqP
+    [ (0, 10, chop 4
+      $ slice 10 (slow "1" "[1-2]")
+      $ sound "<bVocals:0>"
+      # gain 0.6
+      # delay 0.5
+      # delaytime 0.5
+      )
+    , (5, 15, chop 8
+      $ slice 8 (slow "1" "[1-2]")
+      $ sound "<bVocals:1>"
+      # gain 0.5
+      # room 1
+      # size 0.6
+      # delay 0.5
+      # delaytime 0.75
+      )
+    ]
   # orbit 0
-
-d2 $ qtrigger
-  $ chop 8
-  $ slice 8 (slow "1" "[1-2]")
-  $ sound "<bVocals:1>"
-  # gain 0.5
-  # orbit 0
-
-d2 silence
 
 d3
+  $ every 4 ( superimpose
+     (  (|+| gain "0.1") -- slightly louder
+     .  (slice 2 (fast "2" "[1 2 3 4]" )) -- re-slice give variation of slight glitch
+     .  (# sound "bd*4") -- different sample than bDrums
+     ))
+  $ every 2 ( superimpose
+     (  (|+| gain "-0.2")       -- slightly quieter
+     .  (0.25 <~)               -- delay by 1/4 cycle
+     .  (slice 4 (fast "2" "[1 3 2 4]"))  -- re-slice + rearrange
+     .  (# speed 1.1)           -- slight pitch up
+     ))
   $ sound "<bDrums:0> * 4"
   # gain 0.7
   # orbit 1
 
-hush
+d3 silence
+
+d4
+  $ off 0.25 (|+| speed "0.5")
+  $ sound "cp(3,8)"
+  # lpq 0.3
+  # gain 0.4
+  # dry 1
+  # orbit 2
+
+d4 silence
+
+panic
+
+once
+  $ qtrigger
+  $ loopAt 6
+  $ sound "<bVocals:0>"
+  # gain 0.6
+  # orbit 3
+  # room 1
+  # size 0.6
+  # cut 2
+  # lpf 1500
+  # lpq 0.4
+  # delay 2
+  # delaytime 0.5
+
+d5 silence
+
+d6
+ $ loopAt 3.5
+ $ sound "<bVocals:1>"
+ # gain 0.6
+ # orbit 0
+ # room 1
+ # size 0.6
+ # cut 2
+ # lpf 1500
+ # lpq 0.4
+
+panic
+
+
 
 d5
   $ sound "<bSynth:3>"
@@ -56,10 +115,6 @@ d2
   # orbit 3
 
 d2 silence
-
-
-
-
 
 
 d6 $ sound "<bSynth:4>"
