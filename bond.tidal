@@ -1,12 +1,12 @@
 cps(109/60/4)
 
 d1
- $ loopAt 2.5
  $ sound "<GB_Drums:1>"
  # room 1
- # gain 0.8
+ # gain 0.7
  # size 0.6
  # cut 1
+ # sustain 4
  # orbit 0
 
 once $ sound "<GB_Sounds:0>"
@@ -36,6 +36,18 @@ d3
  # orbit 2
  # lpf (range 800 5000 $ fast 4 saw)
  # lpq 0.3
+
+d4
+ $ chop 8
+ $ slice 10 (slow 2 sine)
+ $ sound "<GB_Drums:0>"
+ # room 1
+ # gain 0.8
+ # size 0.6
+ # cut 1
+ # orbit 0
+ # sustain 10
+
 
 panic
 
