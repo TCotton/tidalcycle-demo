@@ -4,17 +4,16 @@ hush
 
 d1 $ qtrigger
   $ seqP
-    [ (0, 10, chop 4
-      $ slice 10 (slow "1" "[1-2]")
+    [ (0, 10, slice 10 (slow "1" "[1-2]")
       $ sound "<bVocals:0>"
       # gain 0.6
       # delay 0.5
       # delaytime 0.5
       )
-    , (5, 15, chop 8
-      $ slice 8 (slow "1" "[1-2]")
+    , (5, 15, chop 4
+      $ slice 12 (slow "1" "[1-2]")
       $ sound "<bVocals:1>"
-      # gain 0.5
+      # gain 0.6
       # room 1
       # size 0.6
       # delay 0.5
@@ -22,6 +21,8 @@ d1 $ qtrigger
       )
     ]
   # orbit 0
+
+dl silence
 
 d3
   $ every 4 ( superimpose
@@ -50,9 +51,38 @@ do
 	      # orbit 2
   d4 $ stack [ clap1 ]
 
-d4 silence
+d5
+  $ within (0.5, 0.75) (chop (round <$> (range 2 12 $ slow 4 sine)))
+  $ slice 8 ("[1-2][5-6]")
+  $ sound "<bass0:1>"
+  # gain 0.5
+  # room 1
+  # size 0.6
+  # orbit 2
 
 panic
+
+d5
+  $ sound "bass * 8"
+  # gain 0.8
+  # legato 4
+  # cutoff (range 800 2500 $ slow 4 sine)
+  # resonance 0.3
+  # lpf (range 200 2000 $ slow 2 tri)
+  # shape 0.2
+  # distort 0.4
+  # up (range 0 0.3 $ slow 3 sine)
+  # orbit 3
+
+panic
+
+d6
+  $ sound
+
+d5 silence
+
+panic
+
 
 once
   $ qtrigger
