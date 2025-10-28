@@ -4,13 +4,13 @@ hush
 
 d1 $ qtrigger
   $ seqP
-    [ (0, 10, slice 10 (slow "1" "[1-2]")
+    [ (0, 15, slice 10 (slow "1" "[1-2]")
       $ sound "<bVocals:0>"
       # gain 0.6
       # delay 0.5
       # delaytime 0.5
       )
-    , (5, 15, chop 4
+    , (10, 20, chop 4
       $ slice 12 (slow "1" "[1-2]")
       $ sound "<bVocals:1>"
       # gain 0.6
@@ -49,7 +49,14 @@ do
 	      # gain 0.4
 	      # dry 1
 	      # orbit 2
-  d4 $ stack [ clap1 ]
+  let soundz1 = within (0.25, 0.5) (chop (round <$> (range 2 12 $ slow 4 sine)))
+	      $ slice 8 ("[1-2][5-6]")
+	      $ sound "<bass0:1>"
+	      # gain 0.5
+	      # room 1
+	      # size 0.6
+	      # orbit 3
+  d4 $ stack [ clap1 , soundz1 ]
 
 d5
   $ within (0.5, 0.75) (chop (round <$> (range 2 12 $ slow 4 sine)))
